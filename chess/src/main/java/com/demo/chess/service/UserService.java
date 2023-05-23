@@ -12,6 +12,7 @@ import com.demo.chess.mapper.UserMapper;
 import com.demo.chess.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +20,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final LobbyService lobbyService;
     private final UserMapper userMapper;
     private final UserCreateMapper userCreateMapper;
 
@@ -34,9 +34,9 @@ public class UserService {
         return userMapper.toResponseDto(getByIdOrThrow(id));
     }
 
-//    public UserDetails readByNickname(String nickname){
-//        return userRepository.readByNickname(nickname);
-//    }
+    public UserDetails readByNickname(String nickname){
+        return userRepository.readByNickname(nickname);
+    }
 
     public UserResponseDto create(UserCreateDto userCreateDto, String ip){
 

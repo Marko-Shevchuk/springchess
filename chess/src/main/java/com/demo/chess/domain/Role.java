@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 
 import java.util.List;
@@ -21,8 +22,8 @@ import java.util.List;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//public class Role implements GrantedAuthority {
-public class Role {
+public class Role implements GrantedAuthority {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -33,8 +34,8 @@ public class Role {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
     private List<User> users;
 
-//    @Override
-//    public String getAuthority() {
-//        return name;
-//    }
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }
