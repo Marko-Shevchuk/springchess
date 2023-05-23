@@ -1,0 +1,9 @@
+chess/target/
+chess/pom.xml.tag
+chess/pom.xml.releaseBackup
+chess/pom.xml.versionsBackup
+chess/pom.xml.next
+chess/release.properties
+chess/dependency-reduced-pom.xml
+chess/buildNumber.properties
+chess/.mvn/timing.properties
