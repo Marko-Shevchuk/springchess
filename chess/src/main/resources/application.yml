@@ -1,6 +1,6 @@
 spring:
-
-
+  flyway:
+    out-of-order: true
   sql:
     init:
       mode: always
