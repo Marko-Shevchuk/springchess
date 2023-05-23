@@ -17,12 +17,12 @@ public class LobbyController {
 
     private final LobbyService lobbyService;
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<LobbyResponseDto> createLobby(@RequestBody LobbyCreateDto lobbyCreateDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(lobbyService.createLobby(lobbyCreateDto));
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<LobbyResponseDto>> getAllLobbies() {
         List<LobbyResponseDto> lobbies = lobbyService.getAllLobbies();
         return ResponseEntity.ok(lobbies);
