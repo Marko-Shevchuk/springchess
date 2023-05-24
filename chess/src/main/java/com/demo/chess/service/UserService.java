@@ -2,6 +2,7 @@ package com.demo.chess.service;
 
 import com.demo.chess.domain.Role;
 import com.demo.chess.domain.User;
+import com.demo.chess.dto.CredentialDto;
 import com.demo.chess.dto.UserCreateDto;
 import com.demo.chess.dto.UserRatingDto;
 import com.demo.chess.dto.UserResponseDto;
@@ -10,8 +11,12 @@ import com.demo.chess.exception.UserByIdNotFoundException;
 import com.demo.chess.mapper.UserCreateMapper;
 import com.demo.chess.mapper.UserMapper;
 import com.demo.chess.repository.UserRepository;
+import com.demo.chess.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+
+import org.springframework.security.authentication.BadCredentialsException;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +28,13 @@ public class UserService {
     private final UserMapper userMapper;
     private final UserCreateMapper userCreateMapper;
 
-
+    public String validateLogin(CredentialDto credentialDto) {
+       User user =  readByNickname(credentialDto.getNickname());
+       if(!user.getPassword().equals(credentialDto.getPassword())) {
+           throw new BadCredentialsException("Invalid credentials!");
+       }
+       return JWTUtil.generateToken(user.getNickname());
+    }
     public User getByIdOrThrow(long id){
         return userRepository.findById(id).orElseThrow(
                 () -> new UserByIdNotFoundException("User with a specified ID not found!"));
@@ -34,7 +45,9 @@ public class UserService {
         return userMapper.toResponseDto(getByIdOrThrow(id));
     }
 
-    public UserDetails readByNickname(String nickname){
+
+    public User readByNickname(String nickname){
+
         return userRepository.readByNickname(nickname);
     }
 
