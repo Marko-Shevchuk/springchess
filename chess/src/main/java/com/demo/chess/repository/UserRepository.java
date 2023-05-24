@@ -11,4 +11,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User readByNickname(String nickname);
 
+
 }

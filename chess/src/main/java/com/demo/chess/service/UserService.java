@@ -14,7 +14,9 @@ import com.demo.chess.repository.UserRepository;
 import com.demo.chess.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+
 import org.springframework.security.authentication.BadCredentialsException;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +45,9 @@ public class UserService {
         return userMapper.toResponseDto(getByIdOrThrow(id));
     }
 
+
     public User readByNickname(String nickname){
+
         return userRepository.readByNickname(nickname);
     }
 
